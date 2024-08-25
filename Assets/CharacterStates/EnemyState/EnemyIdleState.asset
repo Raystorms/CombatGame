@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baea3bf8ef7ef634091b08b8883660c0, type: 3}
+  m_Name: EnemyIdleState
+  m_EditorClassIdentifier: 
+  _exitState: {fileID: 0}
+  _stateChangeTriggers:
+  - {fileID: 11400000, guid: 026b38481f15f73418ede915f0278599, type: 2}
+  - {fileID: 11400000, guid: 484ebbcc8d9c7524e9f6e1d04107af86, type: 2}
+  - {fileID: 11400000, guid: 6f60101b8937bce4dbd985834a57acc3, type: 2}

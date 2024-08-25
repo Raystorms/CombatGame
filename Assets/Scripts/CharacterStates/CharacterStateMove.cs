@@ -21,15 +21,15 @@ namespace CombatGame.CharacterState
             context.Animator.SetBool(_animtionBoolName, false);
         }
 
-        public override void UpdateState(CharacterStateMachineControl context)
+        public override Vector3 UpdateState(CharacterStateMachineControl context)
         {
-            if (MoveInputGetter.IsMovementInput)
+            Vector3 moveDirection = default(Vector3);
+            if (context._characterInput.MoveDirection != default)
             {
                 var _moveSpeedDelta = _moveSpeed * Time.deltaTime;
-                var movementInput = MoveInputGetter.GetMovementInput(Camera.main);
-                var moveDirection = new Vector3(movementInput.x * _moveSpeedDelta, 0, movementInput.z * _moveSpeedDelta);
+                var movementInput = context._characterInput.MoveDirection;
+                moveDirection = new Vector3(movementInput.x * _moveSpeedDelta, 0, movementInput.z * _moveSpeedDelta);
                 context.transform.rotation = Quaternion.LookRotation(movementInput);
-                context.CharacterController.Move(moveDirection);
             }
             else
             {
@@ -37,6 +37,7 @@ namespace CombatGame.CharacterState
             }
 
             base.UpdateState(context);
+            return moveDirection;
         }
     }
 }

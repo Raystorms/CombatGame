@@ -12,11 +12,6 @@ namespace CombatGame.CharacterState
             //Set animation param to idling
         }
 
-        public override void UpdateState(CharacterStateMachineControl context)
-        {
-            base.UpdateState(context);
-        }
-
 
         public override void OnExitState(CharacterStateMachineControl context)
         {

@@ -8,7 +8,7 @@ namespace CombatGame.CharacterStateChanger
     {
         public override bool UpdateCheck(CharacterStateMachineControl context)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (context._characterInput.Attack)
             {
                 context.ChangeState(_targetState);
                 return true;

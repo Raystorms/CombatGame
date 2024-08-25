@@ -9,7 +9,7 @@ namespace CombatGame.CharacterStateChanger
     {
         public override bool UpdateCheck(CharacterStateMachineControl context)
         {
-            if (MoveInputGetter.IsMovementInput)
+            if (context._characterInput.MoveDirection != default)
             {
                 context.ChangeState(_targetState);
                 return true;

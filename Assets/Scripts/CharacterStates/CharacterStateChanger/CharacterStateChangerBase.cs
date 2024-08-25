@@ -13,5 +13,9 @@ namespace CombatGame.CharacterStateChanger
         internal CharacterStateBase _targetState;
 
         public abstract bool UpdateCheck(CharacterStateMachineControl context);
+        public virtual bool EventCheck(CharacterStateMachineControl context, string eventId) 
+        { 
+            return false;
+        }
     }
 }

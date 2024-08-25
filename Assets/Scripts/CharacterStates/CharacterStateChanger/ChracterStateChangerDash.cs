@@ -10,7 +10,7 @@ namespace CombatGame.CharacterStateChanger
     {
         public override bool UpdateCheck(CharacterStateMachineControl context)
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetMouseButtonDown(1)) 
+            if (context._characterInput.Dash) 
             {
                 context.ChangeState(_targetState);
                 return true;

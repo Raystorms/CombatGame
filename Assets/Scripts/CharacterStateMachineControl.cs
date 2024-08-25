@@ -24,7 +24,20 @@ namespace CombatGame.CharacterState
         [SerializeField]
         private CharacterStateBase _currentState;
 
+        [SerializeField]
+        private bool _enableDebug;
+
+        [ShowIf(nameof(_enableDebug))]
+        [SerializeField]
+        private string _debugEvent = "Flinch";
+
+        //this input struct is accessible internally, it's fed from outside source by registering to the delegate
+        internal CharacterStateInputStruct _characterInput;
+        private PollInput _inputPollDelegate;
+
         public CancellationTokenSource StateCancellationTokenSource;
+
+        public delegate CharacterStateInputStruct PollInput();
 
         private void Start()
         {
@@ -34,15 +47,43 @@ namespace CombatGame.CharacterState
 
         private void Update()
         {
-            _characterController.Move(new Vector3(0, -_characterGravity, 0));
-            _currentState.UpdateState(this);
+            //poll input from any outside provider, if none is provided, then just set default to reset it
+            _characterInput = _inputPollDelegate?.Invoke() ?? default;
+
+            var movementVector = _currentState.UpdateState(this);
+            movementVector.y = -_characterGravity * Time.deltaTime;
+            _characterController.Move(movementVector);
         }
 
-        public void ChangeState(CharacterStateBase characterState)
+        internal void ChangeState(CharacterStateBase characterState)
         {
             _currentState.OnExitState(this);
             _currentState = characterState;
             _currentState.OnEnterState(this);
+        }
+
+        public void TriggerEvent(string eventId)
+        {
+            _currentState.TriggerEvent(this, eventId);
+        }
+
+        [ShowIf(nameof(_enableDebug))]
+        [Button]
+        public void DebugTriggerEvent()
+        {
+            TriggerEvent(_debugEvent);
+        }
+
+
+        public void RegisterForInputPolling(PollInput pollInput)
+        {
+            _inputPollDelegate = pollInput;
+        }
+
+        private void OnDestroy()
+        {
+            StateCancellationTokenSource?.Cancel();
+            StateCancellationTokenSource?.Dispose();
         }
     }
 }

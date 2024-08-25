@@ -14,20 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _exitState: {fileID: 11400000, guid: 4781c55866a1ce94d937840fa9308ae5, type: 2}
   _stateChangeTriggers:
+  - {fileID: 11400000, guid: f777ffdc77f5a364d8be9220a3cdb035, type: 2}
   - {fileID: 11400000, guid: 73e222178c6c72a45997b70f0398db35, type: 2}
   _attackAnimatorTriggerParam: Attack
   _attackIndex: 1
   _animatorStateName: Attack1
   _nextComboStartAt: 0.6
   _nextComboState: {fileID: 11400000, guid: e4cbc9f0367b662448ec2da3d4d9423f, type: 2}
-  _aimSnapDistance: 2.5
+  _aimSnapDistance: 3
   _hitLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  _allowRedirectMidAttac: 0
+  _redirectionTurningSpeed: 360
   _hitBoxData:
-  - Size: {x: 1, y: 0.8, z: 0.8}
-    RelativePosition: {x: 0, y: 1, z: 1}
+  - Size: {x: 0.8, y: 0.8, z: 0.9}
+    RelativePosition: {x: -0.2, y: 1, z: 0.8}
     HitStopTimeMs: 70
     SpawnTiming: 0.4
+    Damage: 25
   _previewConfig: 3
-  _previewDuration: 1
+  _previewDuration: 0.5

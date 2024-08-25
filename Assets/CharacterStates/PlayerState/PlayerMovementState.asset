@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _exitState: {fileID: 11400000, guid: 4781c55866a1ce94d937840fa9308ae5, type: 2}
   _stateChangeTriggers:
+  - {fileID: 11400000, guid: f777ffdc77f5a364d8be9220a3cdb035, type: 2}
   - {fileID: 11400000, guid: 73e222178c6c72a45997b70f0398db35, type: 2}
   - {fileID: 11400000, guid: c93bd3ecd2fbcd04899a94f6a842868b, type: 2}
   _moveSpeed: 5

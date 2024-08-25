@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.Pool;
 
 #nullable enable
 
@@ -18,6 +19,7 @@ namespace CombatGame.CharacterState
             public Vector3 RelativePosition;
             public int HitStopTimeMs;
             public float SpawnTiming;
+            public int Damage;
         }
 
         [SerializeField]
@@ -34,6 +36,10 @@ namespace CombatGame.CharacterState
         private float _aimSnapDistance;
         [SerializeField]
         private LayerMask _hitLayerMask;
+        [SerializeField]
+        private bool _allowRedirectMidAttac;
+        [SerializeField]
+        private float _redirectionTurningSpeed = 360;
 
         [SerializeField]
         private HitBoxData[]? _hitBoxData;
@@ -61,26 +67,26 @@ namespace CombatGame.CharacterState
 
             //TODO we could make this into a Utility or Helper class so it's not stuck here in the attack script
             //Aim assist calculation
+            Transform? target = null;
             var hits = RotaryHeart.Lib.PhysicsExtension.Physics.OverlapSphere(context.transform.position, _aimSnapDistance, _hitLayerMask, drawDuration: _previewDuration, preview: _previewConfig);
             if (hits != null && hits.Length > 0)
             {
                 //Use the input direction to calculate closest target to the angle
                 float closestAngle = float.MaxValue;
                 Vector3 finalDirection = Vector3.zero;
+
                 foreach (var hit in hits)
                 {
                     var myPosition = context.transform.position;
                     var targetPosition = hit.transform.position;
-                    //We want to ignore Y positions as it can cause calculation error
-                    myPosition.y = 0;
-                    targetPosition.y = 0;
 
-                    var targetDirection = (targetPosition - myPosition).normalized;
+                    var targetDirection = VectorHelper.GetDirectionIgnoreY(myPosition, targetPosition);
                     var angleToTarget = Vector3.Angle(inputDirection, targetDirection);
                     if (angleToTarget < closestAngle)
                     {
                         closestAngle = angleToTarget;
                         finalDirection = targetDirection;
+                        target = hit.transform;
                     }
                 }
 
@@ -88,14 +94,13 @@ namespace CombatGame.CharacterState
                 inputDirection = finalDirection;
             }
 
-
             context.transform.rotation = Quaternion.LookRotation(inputDirection);
 
             context.StateCancellationTokenSource = new CancellationTokenSource();
-            UpdateAsync(context, context.StateCancellationTokenSource.Token).Forget();
+            UpdateAsync(context, target, context.StateCancellationTokenSource.Token).Forget();
         }
 
-        public async UniTaskVoid UpdateAsync(CharacterStateMachineControl context, CancellationToken cancellationToken)
+        public async UniTaskVoid UpdateAsync(CharacterStateMachineControl context, Transform? target, CancellationToken cancellationToken)
         {
             bool _attackInputed = false;
             bool _isAnimationTriggered = false;
@@ -111,10 +116,20 @@ namespace CombatGame.CharacterState
 
             while (true)
             {
+                if (_allowRedirectMidAttac && target != null)
+                {
+                    var myPosition = context.transform.position;
+                    var targetPosition = target.position;
+    
+                    var targetDirection = VectorHelper.GetDirectionIgnoreY(myPosition, targetPosition);
+                    context.transform.rotation = Quaternion.RotateTowards(context.transform.rotation, Quaternion.LookRotation(targetDirection), _redirectionTurningSpeed * Time.deltaTime);
+
+                }
+
                 //Async cannot do Ref or Out so lets just return the HitboxIndex again
                 hitboxIndex = await ProcessHitBox(context, hitboxIndex, cancellationToken);
 
-                if (_nextComboState != null && Input.GetMouseButtonDown(0))
+                if (_nextComboState != null && context._characterInput.Attack)
                 {
                     _attackInputed = true;
                 }
@@ -148,11 +163,19 @@ namespace CombatGame.CharacterState
                 {
                     var hitboxPosition = context.transform.position + (context.transform.rotation * hitboxData.RelativePosition);
                     //TODO Could be optimized with Non-Alloc
-                    Debug.Log("Check hitbox");
-                    var hit = RotaryHeart.Lib.PhysicsExtension.Physics.OverlapBox(hitboxPosition, hitboxData.Size, context.transform.rotation, _hitLayerMask, drawDuration: _previewDuration, preview: _previewConfig);
-                    if (hit != null && hit.Length > 0)
+                    var hits = RotaryHeart.Lib.PhysicsExtension.Physics.OverlapBox(hitboxPosition, hitboxData.Size, context.transform.rotation, _hitLayerMask, drawDuration: _previewDuration, preview: _previewConfig);
+                    if (hits != null && hits.Length > 0)
                     {
-                        //TODO Proccess hit here
+                        foreach (var hit in hits)
+                        {
+                            //TODO GetComponent not good, for stuff like this should use an kind of PubSub to send an event, so this class don't need to care who process the event
+                            var targetHealthComponent= hit.gameObject.GetComponent<HealthComponent>();
+                            if (targetHealthComponent != null)
+                            {
+                                targetHealthComponent.GetDamaged(hitboxData.Damage);
+                            }
+                        }
+
                         context.Animator.SetFloat("SpdMultiplier", 0);
                         await UniTask.Delay(hitboxData.HitStopTimeMs, cancellationToken: cancellationToken);
                         context.Animator.SetFloat("SpdMultiplier", 1);
