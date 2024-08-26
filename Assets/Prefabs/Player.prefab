@@ -125,7 +125,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5818fcb6594dd8d45a15bedca0d56262, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1
+      value: 2.37
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5818fcb6594dd8d45a15bedca0d56262, type: 3}
       propertyPath: m_LocalPosition.z
@@ -559,8 +559,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterStateMachineControl: {fileID: 436429889058193590}
-  _eventName: Flinch
+  _characterController: {fileID: 3049242831809370918}
+  _flinchEventId: Flinch
+  _deadEventId: Dead
   _health: 100
+  _destroyAfterDeadDelayMs: 2000
 --- !u!4 &6674043530866365933 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: 5818fcb6594dd8d45a15bedca0d56262, type: 3}
@@ -646,7 +649,9 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4484208065627108173, guid: edccbf15fadd9704cb7a2020a492b120, type: 3}
+    - {fileID: 7256057588077515077, guid: edccbf15fadd9704cb7a2020a492b120, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

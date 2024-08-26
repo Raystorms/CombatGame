@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _exitState: {fileID: 11400000, guid: 9771c313f8220fd4fa4601993c10f7d6, type: 2}
   _stateChangeTriggers:
+  - {fileID: 11400000, guid: 165fae54fcc5c7f488f371e3e7ef7d06, type: 2}
   - {fileID: 11400000, guid: b315a40c12c03724f82b7026f2999353, type: 2}
   _flinchDurationMs: 500
-  _animtionBoolName: Flinch
+  _animationBoolName: Flinch

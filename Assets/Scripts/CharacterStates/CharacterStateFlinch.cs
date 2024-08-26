@@ -12,13 +12,13 @@ namespace CombatGame.CharacterState
         private int _flinchDurationMs = 300;
 
         [SerializeField]
-        public string _animtionBoolName = "Flinch";
+        public string _animationBoolName = "Flinch";
 
         public override void OnEnterState(CharacterStateMachineControl context)
         {
             context.StateCancellationTokenSource = new CancellationTokenSource();
             UpdateAsync(context, context.StateCancellationTokenSource.Token).Forget();
-            context.Animator.SetBool(_animtionBoolName, true);
+            context.Animator.SetBool(_animationBoolName, true);
         }
 
         public async UniTaskVoid UpdateAsync(CharacterStateMachineControl context, CancellationToken cancellationToken)
@@ -31,7 +31,7 @@ namespace CombatGame.CharacterState
         {
             context.StateCancellationTokenSource.Cancel();
             context.StateCancellationTokenSource.Dispose();
-            context.Animator.SetBool(_animtionBoolName, false);
+            context.Animator.SetBool(_animationBoolName, false);
         }
     }
 }

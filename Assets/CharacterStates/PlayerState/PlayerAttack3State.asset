@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _exitState: {fileID: 11400000, guid: 4781c55866a1ce94d937840fa9308ae5, type: 2}
   _stateChangeTriggers:
+  - {fileID: 11400000, guid: 490d5c0888fe4b848bba31dcb93913f9, type: 2}
   - {fileID: 11400000, guid: f777ffdc77f5a364d8be9220a3cdb035, type: 2}
   - {fileID: 11400000, guid: 73e222178c6c72a45997b70f0398db35, type: 2}
   _attackAnimatorTriggerParam: Attack
@@ -38,5 +39,5 @@ MonoBehaviour:
     HitStopTimeMs: 70
     SpawnTiming: 0.4
     Damage: 25
-  _previewConfig: 3
+  _previewConfig: 1
   _previewDuration: 0.5

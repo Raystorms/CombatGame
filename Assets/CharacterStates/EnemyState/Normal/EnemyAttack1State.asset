@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e884bda7b8e93e439dbbe2bddab2494, type: 3}
+  m_Name: EnemyAttack1State
+  m_EditorClassIdentifier: 
+  _exitState: {fileID: 11400000, guid: 1188bf54d2435c44293ed1c2a3bcce67, type: 2}
+  _stateChangeTriggers:
+  - {fileID: 11400000, guid: 8ebae1a2d65abde4eb10bec43cdc0671, type: 2}
+  - {fileID: 11400000, guid: 6f60101b8937bce4dbd985834a57acc3, type: 2}
+  _attackAnimatorTriggerParam: Attack
+  _attackIndex: 1
+  _animatorStateName: Attack1
+  _nextComboStartAt: 0.6
+  _nextComboState: {fileID: 0}
+  _aimSnapDistance: 9
+  _hitLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _allowRedirectMidAttac: 1
+  _redirectionTurningSpeed: 360
+  _hitBoxData:
+  - Size: {x: 0.6, y: 0.8, z: 0.8}
+    RelativePosition: {x: 0, y: 1, z: 0.5}
+    HitStopTimeMs: 70
+    SpawnTiming: 0.35
+    Damage: 10
+  _previewConfig: 3
+  _previewDuration: 0.5

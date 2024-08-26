@@ -692,5 +692,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterStateMachineControl: {fileID: 2245374776886110412}
-  _eventName: Flinch
+  _characterController: {fileID: 7100048301012663183}
+  _flinchEventId: Flinch
+  _deadEventId: Dead
   _health: 100
+  _destroyAfterDeadDelayMs: 2000

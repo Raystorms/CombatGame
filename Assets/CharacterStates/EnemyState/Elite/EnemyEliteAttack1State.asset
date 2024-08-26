@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: EnemyEliteAttack1State
   m_EditorClassIdentifier: 
   _exitState: {fileID: 11400000, guid: 9771c313f8220fd4fa4601993c10f7d6, type: 2}
-  _stateChangeTriggers: []
+  _stateChangeTriggers:
+  - {fileID: 11400000, guid: 165fae54fcc5c7f488f371e3e7ef7d06, type: 2}
   _attackAnimatorTriggerParam: Attack
   _attackIndex: 1
   _animatorStateName: Attack1
