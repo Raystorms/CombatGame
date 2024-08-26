@@ -78,6 +78,7 @@ namespace CombatGame.CharacterState
             context.Animator.SetBool("Dashing", false);
             context.StateCancellationTokenSource.Cancel();
             context.StateCancellationTokenSource.Dispose();
+            context.StateCancellationTokenSource = null;
         }
     }
 }

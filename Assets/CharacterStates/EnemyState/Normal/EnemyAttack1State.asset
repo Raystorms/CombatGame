@@ -33,5 +33,5 @@ MonoBehaviour:
     HitStopTimeMs: 70
     SpawnTiming: 0.35
     Damage: 10
-  _previewConfig: 3
+  _previewConfig: 1
   _previewDuration: 0.5

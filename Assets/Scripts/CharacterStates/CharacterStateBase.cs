@@ -1,9 +1,7 @@
-using UnityEngine;
-using CombatGame.Util;
 using CombatGame.CharacterStateChanger;
-using System;
 using NaughtyAttributes;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
+using System;
+using UnityEngine;
 
 namespace CombatGame.CharacterState
 {

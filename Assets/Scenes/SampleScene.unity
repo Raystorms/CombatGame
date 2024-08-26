@@ -1199,7 +1199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cinemachineTarget: {fileID: 87900525}
   _cinemachineCamera: {fileID: 980056762}
-  _mouseSensitivity: 100
+  _mouseSensitivity: 200
   _cameraXMax: {x: -50, y: 85}
 --- !u!1 &1480781092
 GameObject:

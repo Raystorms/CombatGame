@@ -1,10 +1,7 @@
 using CombatGame.CharacterState;
-using CombatGame.Util;
 using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEngine;
-using static CombatGame.CharacterState.CharacterStateMachineControl;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 namespace CombatGame.InputSystem
 {

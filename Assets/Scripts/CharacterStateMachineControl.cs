@@ -84,6 +84,7 @@ namespace CombatGame.CharacterState
         {
             StateCancellationTokenSource?.Cancel();
             StateCancellationTokenSource?.Dispose();
+            StateCancellationTokenSource = null;
         }
     }
 }

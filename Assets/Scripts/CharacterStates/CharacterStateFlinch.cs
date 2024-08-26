@@ -31,6 +31,7 @@ namespace CombatGame.CharacterState
         {
             context.StateCancellationTokenSource.Cancel();
             context.StateCancellationTokenSource.Dispose();
+            context.StateCancellationTokenSource = null;
             context.Animator.SetBool(_animationBoolName, false);
         }
     }
