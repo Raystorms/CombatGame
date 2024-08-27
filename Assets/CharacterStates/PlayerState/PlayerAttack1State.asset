@@ -29,8 +29,8 @@ MonoBehaviour:
   _allowRedirectMidAttac: 0
   _redirectionTurningSpeed: 360
   _hitBoxData:
-  - Size: {x: 0.8, y: 0.8, z: 1}
-    RelativePosition: {x: -0.2, y: 1, z: 0.7}
+  - Size: {x: 0.8, y: 0.8, z: 1.1}
+    RelativePosition: {x: -0.2, y: 1, z: 0.8}
     HitStopTimeMs: 70
     SpawnTiming: 0.4
     Damage: 25
